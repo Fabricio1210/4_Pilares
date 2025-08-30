@@ -4,5 +4,5 @@ Cómo probar el programa
 2. Abre una terminal en la carpeta del proyecto.
 3. Ejecuta:
 
-   ```bash
-   python main.py
+   Bash
+   python 4_Pilares.py
