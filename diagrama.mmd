@@ -1,0 +1,56 @@
+classDiagram
+    Notificador <|.. NotificadorEmail
+    Notificador <|.. NotificadorWebhook
+    Sensor <|-- SensorTemperatura
+    Sensor <|-- SensorVibracion
+    Sensor <|-- SensorMovimiento
+    GestorAlertas --> Sensor : usa
+    GestorAlertas --> Notificador : usa
+    ControladorLuces ..> SensorMovimiento : depende de
+    class Notificador{
+        +enviar(mensaje):none
+    }
+    class NotificadorEmail{
+        +__init__(url):none
+        +enviar(mensaje):none
+    }
+    class NotificadorWebhook{
+        +__init__(url):none
+        +enviar(mensaje):none
+    }
+    class Sensor{
+        +String id
+        +int ventana
+        -float calibracion
+        -list[float] buffer
+        +leer(valor):none
+        +promedio():float
+        +en_alerta():bool
+        +obtener_unidad():string
+    }
+    class SensorTemperatura{
+        +float umbral
+        +en_alerta():bool
+        +obtener_unidad():string
+    }
+    class SensorVibracion{
+        +float rms_umbral
+        +en_alerta():bool
+        +obtener_unidad():string
+    }
+    class SensorMovimiento{
+        float mov_umbral
+        +en_alerta():bool
+        +obtener_unidad():String
+    }
+    class GestorAlertas{
+        +__init__(sensores,notificadores):none
+        +evaluar_y_notificar():none
+    }
+    class ControladorLuces{
+        +__init__(sensorMovimiento):none
+        +verificar_movimiento():none
+        +encender_luces():none
+        +apagar_luces():none
+    }
+    
